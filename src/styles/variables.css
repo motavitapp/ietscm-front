@@ -1,0 +1,51 @@
+/* ═══════════════════════════════════════════════════════
+   variables.css — Design tokens institucionales IETSCM
+   Paleta basada en el escudo institucional:
+     Verde (fondo del escudo, cuadrantes), Dorado (corona/detalles),
+     Rojo (cuadrante inferior izquierdo)
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  /* Colores principales */
+  --verde:        #1B5931;
+  --verde-dark:   #123D20;
+  --verde-light:  #2A7A43;
+  --verde-bg:     #EAF3EC;
+
+  --dorado:       #C8941A;
+  --dorado-light: #F5E8C8;
+  --dorado-dark:  #A07212;
+
+  --rojo:         #8B1E1E;
+  --rojo-light:   #F5E4E4;
+
+  /* Neutros */
+  --crema:        #F8F6F1;
+  --white:        #FFFFFF;
+  --borde:        #E5E7EB;
+  --gris-claro:   #F3F4F6;
+  --gris:         #6B7280;
+
+  /* Texto */
+  --text:         #1F2937;
+  --text-muted:   #6B7280;
+
+  /* Tipografía */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Source Sans 3', system-ui, sans-serif;
+
+  /* Espaciado */
+  --radius:       8px;
+  --radius-lg:    14px;
+  --radius-xl:    20px;
+
+  /* Sombras */
+  --shadow:       0 2px 12px rgba(27, 89, 49, 0.10);
+  --shadow-md:    0 6px 24px rgba(0, 0, 0, 0.12);
+  --shadow-lg:    0 16px 48px rgba(0, 0, 0, 0.18);
+
+  /* Layout */
+  --max-width:    1100px;
+  --sidebar-w:    240px;
+  --header-h:     72px;
+}

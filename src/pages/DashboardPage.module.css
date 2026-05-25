@@ -1,0 +1,104 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--crema);
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  background: #fff;
+  border-bottom: 1px solid var(--borde);
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.topbar h2 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--verde-dark);
+  font-weight: 700;
+}
+
+.topbarActions {
+  display: flex;
+  gap: 10px;
+}
+
+.content {
+  padding: 24px 28px;
+  flex: 1;
+}
+
+/* Stat cards row — 3 cards (Visitas Hoy eliminada) */
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+/* Welcome panel */
+.welcome {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--borde);
+  padding: 28px 32px;
+}
+
+.welcome h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--verde-dark);
+  margin-bottom: 10px;
+}
+
+.welcome p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  max-width: 600px;
+}
+
+/* Panel body used by sub-routes */
+.panelBody {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--borde);
+  padding: 22px;
+}
+
+/* Placeholder para módulos en construcción */
+.placeholder {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--borde);
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.placeholder span { font-size: 48px; }
+.placeholder p    { font-size: 16px; font-weight: 600; color: var(--verde-dark); }
+.placeholder small { font-size: 13px; line-height: 1.6; }
+.placeholder code {
+  font-family: monospace;
+  background: var(--gris-claro);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}

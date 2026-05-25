@@ -1,0 +1,108 @@
+.card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--borde);
+  margin-bottom: 22px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s;
+}
+
+.card:hover { transform: translateY(-2px); }
+
+.header {
+  padding: 20px 24px 14px;
+  border-bottom: 1px solid var(--gris-claro);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.categoryTag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 3px;
+  margin-bottom: 8px;
+}
+
+.catAcademico    { background: var(--verde-bg);     color: var(--verde); }
+.catEventos      { background: var(--dorado-light); color: var(--dorado-dark); }
+.catInstitucional{ background: var(--rojo-light);   color: var(--rojo); }
+
+.title {
+  font-family: var(--font-display);
+  font-size: 19px;
+  color: var(--verde-dark);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.date {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.body {
+  padding: 14px 24px 18px;
+}
+
+.body p {
+  font-size: 14.5px;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* Images */
+.images { display: grid; gap: 3px; }
+
+.single img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.double {
+  grid-template-columns: 1fr 1fr;
+}
+
+.double img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+/* Footer — solo metadatos, sin botones */
+.footer {
+  padding: 12px 24px;
+  border-top: 1px solid var(--gris-claro);
+  display: flex;
+  align-items: center;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.authorAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--verde-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--verde);
+}
