@@ -8,7 +8,7 @@
 
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
-import escudo from '@/assets/escudo.png';
+import escudo from '@/assets/escudoietscm.png';
 import styles from './DashboardSidebar.module.css';
 
 const NAV_ITEMS = [
@@ -61,10 +61,10 @@ export default function DashboardSidebar({ activeSection, onSectionChange }) {
 
       {/* User footer */}
       <div className={styles.user}>
-        <div className={styles.avatar}>DS</div>
+        <div className={styles.avatar}>A</div>
         <div className={styles.userInfo}>
-          <strong>Director/a</strong>
-          <span>Administrador</span>
+          <strong>Administrador/a</strong>
+          <span>Sesión activa</span>
         </div>
         <button
           className={styles.logoutBtn}

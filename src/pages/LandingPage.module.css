@@ -12,13 +12,17 @@
   height: 100%;
   object-fit: cover;
   object-position: center 30%;
-  filter: brightness(0.55);
+  filter: brightness(0.80);
 }
 
 .heroOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(27,89,49,.85) 0%, rgba(18,61,32,.5) 60%, transparent 100%);
+  background: linear-gradient(
+    135deg, 
+    rgba(27,89,49,.85) 0%,
+    rgba(18,61,32,.15) 60%, 
+    transparent 100%);
 }
 
 .heroContent {
@@ -154,3 +158,48 @@
 .quickLink:last-child { border-bottom: none; }
 .quickLink:hover { color: var(--verde); }
 .arrow { margin-left: auto; color: var(--text-muted); }
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 28px 0 8px;
+  border-top: 1px solid var(--borde);
+  margin-top: 8px;
+}
+
+.pageBtn {
+  background: var(--white);
+  color: var(--verde);
+  border: 1.5px solid var(--verde);
+  padding: 9px 20px;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, opacity 0.2s;
+}
+
+.pageBtn:hover:not(:disabled) {
+  background: var(--verde);
+  color: var(--white);
+}
+
+.pageBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  border-color: var(--borde);
+  color: var(--text-muted);
+}
+
+.pageInfo {
+  font-size: 14px;
+  color: var(--text-muted);
+  min-width: 130px;
+  text-align: center;
+}
+
+.pageInfo strong {
+  color: var(--verde-dark);
+}

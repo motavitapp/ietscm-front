@@ -9,7 +9,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
-import escudo from '@/assets/escudo.png';
+import escudo from '@/assets/escudoietscm.png';
 import styles from './LoginPage.module.css';
 
 export default function LoginPage() {
@@ -45,7 +45,7 @@ export default function LoginPage() {
             {error && <div className={styles.error}>{error}</div>}
 
             <div className="form-group">
-              <label className="form-label">Correo electrónico institucional</label>
+              <label className="form-label">Usuario</label>
               <div className={styles.inputWrap}>
                 <span className={styles.inputIcon}>📧</span>
                 <input
@@ -85,7 +85,7 @@ export default function LoginPage() {
               {loading ? 'Iniciando sesión…' : 'Iniciar Sesión →'}
             </button>
 
-            {/* Volver — Tarea 1: botón justo debajo de "Iniciar Sesión" */}
+            {/* Volver */}
             <Link to="/" className={styles.backBtn}>
               ← Volver a la página principal
             </Link>
@@ -96,12 +96,11 @@ export default function LoginPage() {
             <a href="#">Restablecer acceso</a>
           </div>
 
-          {/* Aviso SSL eliminado (Tarea 1) */}
         </div>
       </div>
 
       <p className={styles.footerNote}>
-        © {new Date().getFullYear()} I.E. Técnica Santa Cruz de Motavita — Plataforma de Gestión Institucional
+        © {new Date().getFullYear()} I.E. Técnica Santa Cruz de Motavita — Plataforma Web de Información
       </p>
     </div>
   );

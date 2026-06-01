@@ -12,10 +12,15 @@ import PostCard from '@/components/posts/PostCard';
 import fachada  from '@/assets/fachada.jpg';
 import styles   from './LandingPage.module.css';
 
+const POSTS_PER_PAGE = 5;
+
+
 export default function LandingPage() {
   const [posts,   setPosts]   = useState([]);
   const [loading, setLoading] = useState(true);
   const [error,   setError]   = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  
 
   // Fetch al montarse — solo posts publicados, sin token
   useEffect(() => {
@@ -25,6 +30,15 @@ export default function LandingPage() {
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, []);
+
+  // ── Lógica de paginación ─────────────────────────────────────────
+  const totalPages  = Math.ceil(posts.length / POSTS_PER_PAGE);
+  const startIndex  = (currentPage - 1) * POSTS_PER_PAGE;         // ej. pág 2 → índice 5
+  const endIndex    = currentPage * POSTS_PER_PAGE;                // ej. pág 2 → índice 10
+  const postsInView = posts.slice(startIndex, endIndex);           // bloque visible
+
+  const goToPrev = () => setCurrentPage((p) => Math.max(p - 1, 1));
+  const goToNext = () => setCurrentPage((p) => Math.min(p + 1, totalPages));
 
   return (
     <div>
@@ -91,9 +105,37 @@ export default function LandingPage() {
             </p>
           )}
 
-          {posts.map((post) => (
+          {/* Bloque visible de posts (slice del array completo) */}
+          {postsInView.map((post) => (
             <PostCard key={post.id} post={post} />
           ))}
+
+          {/* ── Controles de paginación ── */}
+          {!loading && !error && totalPages > 1 && (
+            <div className={styles.pagination}>
+              <button
+                className={styles.pageBtn}
+                onClick={goToPrev}
+                disabled={currentPage === 1}
+                aria-label="Página anterior"
+              >
+                ← Anterior
+              </button>
+
+              <span className={styles.pageInfo}>
+                Página <strong>{currentPage}</strong> de <strong>{totalPages}</strong>
+              </span>
+
+              <button
+                className={styles.pageBtn}
+                onClick={goToNext}
+                disabled={currentPage === totalPages}
+                aria-label="Página siguiente"
+              >
+                Siguiente →
+              </button>
+            </div>
+          )}
         </main>
 
         {/* Sidebar */}

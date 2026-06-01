@@ -51,7 +51,6 @@ export default function PostCard({ post }) {
         <p>{body}</p>
       </div>
 
-      {/* ── Images (opcional) ── */}
       {image_urls.length > 0 && (
         <div className={`${styles.images} ${image_urls.length === 1 ? styles.single : styles.double}`}>
           {image_urls.map((url, i) => (
@@ -60,7 +59,7 @@ export default function PostCard({ post }) {
         </div>
       )}
 
-      {/* ── Footer — solo metadatos, sin botones de acción (Tarea 1) ── */}
+      {/* ── Footer — */}
       <div className={styles.footer}>
         <div className={styles.author}>
           <div className={styles.authorAvatar}>

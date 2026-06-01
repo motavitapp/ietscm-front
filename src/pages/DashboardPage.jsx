@@ -16,6 +16,7 @@ import DashboardSidebar from '@/components/layout/DashboardSidebar';
 import StatCard         from '@/components/ui/StatCard';
 import PostsTable       from '@/components/posts/PostsTable';
 import DifusionModule   from '@/components/difusion/DifusionModule';
+import ParentsModule    from '@/components/parents/ParentsModule';
 import styles from './DashboardPage.module.css';
 
 // ── Vistas internas ──────────────────────────────────────────────────
@@ -23,13 +24,13 @@ import styles from './DashboardPage.module.css';
 function OverviewPane({ stats }) {
   return (
     <>
-      {/* Stat-cards — solo 3 (Tarea 1: eliminado "Visitas Hoy") */}
+      {/* Stat-cards — */}
       <div className={styles.statsRow}>
         <StatCard
           icon="📝"
           label="Publicaciones"
           value={stats?.total_posts ?? '—'}
-          sub="↑ 3 este mes"
+          sub="En total"
           variant="green"
         />
         <StatCard
@@ -41,18 +42,18 @@ function OverviewPane({ stats }) {
         />
         <StatCard
           icon="📨"
-          label="Correos Enviados"
+          label="Comunicados"
           value={stats?.total_broadcasts ?? '—'}
-          sub="Difusiones este año"
+          sub="Difusiones realizadas"
           variant="red"
         />
       </div>
 
       <div className={styles.welcome}>
-        <h3>Bienvenido al Panel de Administración</h3>
+        <h3>Bienvenid@ al Panel de Administración</h3>
         <p>
-          Desde aquí puede gestionar las publicaciones del sitio web institucional y
-          enviar comunicados masivos a los padres de familia. Use el menú lateral
+          Desde aquí puede gestionar las publicaciones del sitio web institucional,
+          enviar comunicados masivos a los padres de familia y gestionar los padres de familia registrados en el sistema. Use el menú lateral
           para navegar entre los módulos.
         </p>
       </div>
@@ -67,22 +68,11 @@ function PostsPane() {
       posts={posts}
       loading={loading}
       onCreate={create}
-      onUpdate={update}
       onDelete={remove}
     />
   );
 }
 
-function ParentsPane() {
-  return (
-    <div className={styles.placeholder}>
-      <span>👥</span>
-      <p>Módulo de Padres de Familia</p>
-      <small>Listado, búsqueda y gestión de correos de padres registrados.<br />
-        Conectar con el endpoint <code>GET /api/v1/parents</code></small>
-    </div>
-  );
-}
 
 // ── Página principal del Dashboard ──────────────────────────────────
 
@@ -131,7 +121,7 @@ export default function DashboardPage() {
             <Route index                  element={<OverviewPane stats={stats} />} />
             <Route path="posts"           element={<PostsPane />} />
             <Route path="difusion"        element={<DifusionModule />} />
-            <Route path="parents"         element={<ParentsPane />} />
+            <Route path="parents"         element={<ParentsModule />} />
           </Routes>
         </div>
       </div>

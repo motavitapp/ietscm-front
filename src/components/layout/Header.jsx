@@ -7,7 +7,7 @@
  */
 
 import { Link } from 'react-router-dom';
-import escudo from '@/assets/escudo.png';
+import escudo from '@/assets/escudoietscm.png';
 import styles from './Header.module.css';
 
 export default function Header() {
@@ -22,7 +22,6 @@ export default function Header() {
       </Link>
 
       <nav className={styles.nav}>
-        {/* Solo Contacto e Ingresar (Tarea 1 — Landing nav) */}
         <a href="#contacto" className={styles.navLink}>Contacto</a>
         <Link to="/login" className={styles.loginBtn}>Ingresar</Link>
       </nav>

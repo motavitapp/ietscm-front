@@ -7,6 +7,30 @@ import { useState, useEffect } from 'react';
 import { broadcastService, parentsService } from '@/services/api';
 import styles from './DifusionModule.module.css';
 
+/**
+ * Parsea strings ISO 8601 del backend de forma segura.
+ * JS soporta solo milisegundos (3 decimales); el backend puede enviar
+ * microsegundos (6 decimales): "2026-05-28T00:13:26.555659+00:00"
+ * Se truncan los decimales sobrantes antes de construir el Date.
+ *
+ * @param {string} dateStr
+ * @returns {string} Fecha formateada o "—" si el valor es inválido
+ */
+const formatDate = (dateStr) => {
+  if (!dateStr) return '—';
+  // Trunca microsegundos a milisegundos: .555659 -> .555
+  const normalized = dateStr.replace(/(\.\d{3})\d+/, '$1');
+  const date = new Date(normalized);
+  if (isNaN(date.getTime())) return '—';
+  return date.toLocaleDateString('es-CO', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+};
+
 const TEMPLATES = [
   { id: 'urgent',    label: '📢 Comunicado urgente' },
   { id: 'meeting',   label: '📅 Convocatoria / Reunión' },
@@ -136,14 +160,7 @@ export default function DifusionModule() {
             ))}
           </select>
         </div>
-        <div>
-          <label className="form-label">Programar envío</label>
-          <select className="form-select" value={scheduled} onChange={(e) => setScheduled(e.target.value)}>
-            <option value="now">Enviar ahora</option>
-            <option value="tomorrow">Mañana 7:00 a.m.</option>
-            <option value="custom">Elegir fecha y hora…</option>
-          </select>
-        </div>
+
       </div>
 
       {/* Error / Result feedback */}
@@ -161,7 +178,6 @@ export default function DifusionModule() {
           ⚠️ Esta acción enviará correos a los destinatarios seleccionados.
           Verifique el contenido antes de enviar.
         </span>
-        <button className="btn btn-outline btn-sm">👁 Vista previa</button>
         <button className={styles.sendBtn} onClick={handleSend} disabled={sending}>
           {sending ? 'Enviando…' : '📨 Enviar Comunicado'}
         </button>
@@ -178,7 +194,7 @@ export default function DifusionModule() {
                 <div className={styles.historyInfo}>
                   <strong>{rec.subject}</strong>
                   <span>
-                    Enviado el {new Date(rec.sent_at).toLocaleDateString('es-CO')}
+                    Enviado el {formatDate(rec.scheduled_at)}
                   </span>
                 </div>
                 <div className={styles.historyMeta}>

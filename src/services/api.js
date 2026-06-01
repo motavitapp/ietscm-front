@@ -167,9 +167,51 @@ export const postsService = {
 //  PARENTS SERVICE
 // ════════════════════════════════════════════════════════════════════
 
+/**
+ * @typedef {Object} Parent
+ * @property {string} id
+ * @property {string} name
+ * @property {string} last_name
+ * @property {string} email
+ * @property {string} student
+ *
+ * @typedef {Object} ParentPayload
+ * @property {string} name
+ * @property {string} last_name
+ * @property {string} email
+ * @property {string} student
+ */
+
 export const parentsService = {
-  getAll:   () => request('/parents',       {}, true),
+  /**
+   * PROTEGIDO. GET /parents
+   * Respuesta: Parent[]
+   */
+  getAll: () => request('/parents', {}, true),
+
+  /** GET /parents/count → { total, active } */
   getCount: () => request('/parents/count', {}, true),
+
+  /**
+   * PROTEGIDO. POST /parents
+   * Content-Type: application/json
+   * Payload: { name, last_name, email, student }
+   * Respuesta: Parent (con id asignado por el servidor)
+   *
+   * @param {ParentPayload} payload
+   * @returns {Promise<Parent>}
+   */
+  create: (payload) =>
+    request('/parents', { method: 'POST', body: JSON.stringify(payload) }, true),
+
+  /**
+   * PROTEGIDO. DELETE /parents/:id
+   * Respuesta: 204 No Content
+   *
+   * @param {string} id
+   * @returns {Promise<null>}
+   */
+  delete: (id) => request(`/parents/${id}`, { method: 'DELETE' }, true),
 };
 
 // ════════════════════════════════════════════════════════════════════
@@ -182,7 +224,7 @@ export const parentsService = {
  * @property {string}  body
  * @property {string}  segment       - 'all'|'grade_10'|'grade_11'|'bachillerato'|'primaria'
  * @property {string}  template      - 'urgent'|'meeting'|'academic'|'enrollment'|'alert'|'blank'
- * @property {string}  [scheduled_at]- ISO 8601; omitir para envío inmediato
+ * @property {string}  [scheduled_at] - ISO 8601; omitir para envío inmediato
  *
  * @typedef {Object} BroadcastResult
  * @property {number} sent

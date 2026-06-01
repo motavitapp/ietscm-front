@@ -1,6 +1,14 @@
 /**
  * components/posts/PostsTable.jsx
- * onSubmit de PostForm ahora recibe un objeto plano JSON.
+ *
+ * Cambios respecto a la versión anterior:
+ *  - Eliminado: estado editPost
+ *  - Eliminado: función handleEdit
+ *  - Eliminado: función handleUpdate
+ *  - Eliminado: prop onUpdate
+ *  - Eliminado: botón "✏️ Editar" en cada fila
+ *  - Eliminado: <PostForm> condicional para edición
+ *  - Simplificado: <PostForm> solo se usa para crear nuevos posts
  */
 
 import { useState } from 'react';
@@ -12,9 +20,15 @@ const STATUS_LABEL = { published: 'Publicado',     draft: 'Borrador' };
 const CAT_CLASS    = { academico: 'tag-academico', eventos: 'tag-eventos', institucional: 'tag-institucional' };
 const CAT_LABEL    = { academico: 'Académico',     eventos: 'Eventos',     institucional: 'Institucional' };
 
-export default function PostsTable({ posts, loading, onCreate, onUpdate, onDelete }) {
+/**
+ * @param {Object}   props
+ * @param {Post[]}   props.posts
+ * @param {boolean}  props.loading
+ * @param {Function} props.onCreate  - (payload) => Promise
+ * @param {Function} props.onDelete  - (id) => Promise
+ */
+export default function PostsTable({ posts, loading, onCreate, onDelete }) {
   const [showForm, setShowForm] = useState(false);
-  const [editPost, setEditPost] = useState(null);
   const [search,   setSearch]   = useState('');
   const [catFilter,setCatFilter]= useState('');
 
@@ -24,11 +38,10 @@ export default function PostsTable({ posts, loading, onCreate, onUpdate, onDelet
     return matchSearch && matchCat;
   });
 
-  // onCreate/onUpdate reciben el objeto JSON directamente desde PostForm
-  const handleCreate = async (payload) => { await onCreate(payload);          setShowForm(false); };
-  const handleUpdate = async (payload) => { await onUpdate(editPost.id, payload); setEditPost(null); };
-  const handleEdit   = (post)           => { setEditPost(post); setShowForm(false); };
-  const handleNew    = ()               => { setEditPost(null); setShowForm(true); };
+  const handleCreate = async (payload) => {
+    await onCreate(payload);
+    setShowForm(false);
+  };
 
   const handleDelete = async (id) => {
     if (!window.confirm('¿Eliminar esta publicación?')) return;
@@ -56,7 +69,7 @@ export default function PostsTable({ posts, loading, onCreate, onUpdate, onDelet
           <option value="eventos">Eventos</option>
           <option value="institucional">Institucional</option>
         </select>
-        <button className="btn btn-primary btn-sm" onClick={handleNew}>
+        <button className="btn btn-primary btn-sm" onClick={() => setShowForm(true)}>
           + Crear post
         </button>
       </div>
@@ -100,10 +113,10 @@ export default function PostsTable({ posts, loading, onCreate, onUpdate, onDelet
                   </td>
                   <td>
                     <div className={styles.actions}>
-                      <button className={`btn btn-sm ${styles.btnEdit}`} onClick={() => handleEdit(post)}>
-                        ✏️ Editar
-                      </button>
-                      <button className={`btn btn-sm ${styles.btnDel}`} onClick={() => handleDelete(post.id)}>
+                      <button
+                        className={`btn btn-sm ${styles.btnDel}`}
+                        onClick={() => handleDelete(post.id)}
+                      >
                         🗑️ Eliminar
                       </button>
                     </div>
@@ -115,8 +128,13 @@ export default function PostsTable({ posts, loading, onCreate, onUpdate, onDelet
         </div>
       )}
 
-      {showForm  && <PostForm onSubmit={handleCreate} onCancel={() => setShowForm(false)} />}
-      {editPost  && <PostForm post={editPost} onSubmit={handleUpdate} onCancel={() => setEditPost(null)} />}
+      {/* Formulario para creación */}
+      {showForm && (
+        <PostForm
+          onSubmit={handleCreate}
+          onCancel={() => setShowForm(false)}
+        />
+      )}
     </div>
   );
 }

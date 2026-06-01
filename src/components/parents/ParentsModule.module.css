@@ -1,0 +1,97 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search { flex: 1; }
+
+.msg {
+  padding: 32px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.errorBox {
+  background: var(--rojo-light);
+  color: var(--rojo);
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  font-size: 13.5px;
+}
+
+.tableWrap { overflow-x: auto; }
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.table th {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 9px 14px;
+  border-bottom: 2px solid var(--borde);
+  text-align: left;
+  white-space: nowrap;
+  background: var(--crema);
+}
+
+.table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--gris-claro);
+  vertical-align: middle;
+  color: var(--text);
+}
+
+.table tr:last-child td { border-bottom: none; }
+.table tr:hover td { background: var(--verde-bg); }
+
+.tdId {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+  width: 48px;
+}
+
+.email {
+  color: var(--verde);
+  text-decoration: none;
+  font-size: 13px;
+}
+.email:hover { text-decoration: underline; }
+
+.studentBadge {
+  display: inline-block;
+  background: var(--dorado-light);
+  color: var(--dorado-dark);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+
+.count {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: right;
+  padding-top: 4px;
+}
+
+.btnDel {
+  background: var(--rojo-light);
+  color: var(--rojo);
+  border: none;
+}
+.btnDel:hover { opacity: 0.8; }

@@ -39,26 +39,38 @@ export default function PostForm({ post = null, onSubmit, onCancel }) {
   const [loading,  setLoading]  = useState(false);
   const [error,    setError]    = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
+// DESPUÉS — con validación explícita
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const payload = {
-      title:    title.trim(),
-      body:     body.trim(),
-      category,
-      author,
-    };
+  // Validación manual (necesaria porque el form usa noValidate)
+  if (!title.trim()) {
+    setError('El título es obligatorio.');
+    return;
+  }
+  if (!body.trim()) {
+    setError('El contenido es obligatorio.');
+    return;
+  }
 
-    try {
-      await onSubmit(payload);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
+  setLoading(true);
+  setError(null);
+
+  const payload = {
+    title:    title.trim(),
+    body:     body.trim(),
+    category,
+    author,
   };
+
+  try {
+    await onSubmit(payload);
+  } catch (err) {
+    setError(err.message);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <form className={styles.form} onSubmit={handleSubmit} noValidate>
@@ -80,7 +92,7 @@ export default function PostForm({ post = null, onSubmit, onCancel }) {
         />
       </div>
 
-      {/* Categoría + Autor — misma posición y diseño que antes tenía Categoría + Estado */}
+      {/* Categoría y Autor */}
       <div className={styles.grid2}>
         <div>
           <label className="form-label">Categoría *</label>

@@ -1,4 +1,4 @@
-import escudo from '@/assets/escudo.png';
+import escudo from '@/assets/escudoietscm.png';
 import styles from './Footer.module.css';
 
 export default function Footer() {
@@ -9,9 +9,7 @@ export default function Footer() {
           <img src={escudo} alt="Escudo" className={styles.logo} />
           <h3>I.E. Técnica Santa Cruz de Motavita</h3>
           <p>
-            Institución oficial de educación básica y media con énfasis técnico,
-            al servicio de la comunidad de Motavita y municipios aledaños del
-            departamento de Boyacá, Colombia.
+            Entidad oficial de Educación Preescolar, Básica Primaria, Básica Secundaria y Media.  Con autorización de funcionamiento ante la Secretaría de Educación de Boyacá, mediante la Resolución No. 00025 del 16 de enero de 2009.
           </p>
         </div>
 
@@ -35,7 +33,7 @@ export default function Footer() {
 
       <div className={styles.bottom}>
         <span>© {new Date().getFullYear()} I.E. Técnica Santa Cruz de Motavita — Motavita, Boyacá, Colombia</span>
-        <span>Plataforma Web Institucional v1.0</span>
+        <span>Plataforma Web de Información v1.0</span>
       </div>
     </footer>
   );
